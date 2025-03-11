@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Predict Fish Weight</h1>
+    <input type="number" id="feature1" placeholder="Feature 1 (e.g., Length)">
+    <input type="number" id="feature2" placeholder="Feature 2 (e.g., Height)">
+    <button onclick="predict()">Predict</button>
+    <p id="result"></p>
+</div>
+
+<script src="https://unpkg.com/ml.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
