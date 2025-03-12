@@ -13,9 +13,8 @@ async function predict() {
     const length = document.getElementById('length');
     const height = document.getElementById('height');
     const width = document.getElementById('width');
-    const species = document.getElementById('species');
 
-    if (!length || !height || !width || !species) {
+    if (!length || !height || !width) {
         console.error('One or more elements not found');
         return;
     }
@@ -23,9 +22,8 @@ async function predict() {
     const lengthValue = parseFloat(length.value);
     const heightValue = parseFloat(height.value);
     const widthValue = parseFloat(width.value);
-    const speciesValue = species.value;
 
-    if (isNaN(lengthValue) || isNaN(heightValue) || isNaN(widthValue) || !speciesValue) {
+    if (isNaN(lengthValue) || isNaN(heightValue) || isNaN(widthValue)) {
         document.getElementById('result').innerText = 'Please enter valid data for all fields';
         document.getElementById('result').classList.remove('d-none');
         return;
