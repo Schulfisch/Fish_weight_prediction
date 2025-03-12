@@ -10,18 +10,28 @@ async function predict() {
         await loadModel();
     }
 
-    const length = parseFloat(document.getElementById('length').value);
-    const height = parseFloat(document.getElementById('height').value);
-    const width = parseFloat(document.getElementById('width').value);
-    const species = document.getElementById('species').value;
+    const length = document.getElementById('length');
+    const height = document.getElementById('height');
+    const width = document.getElementById('width');
+    const species = document.getElementById('species');
 
-    if (isNaN(length) || isNaN(height) || isNaN(width) || !species) {
+    if (!length || !height || !width || !species) {
+        console.error('One or more elements not found');
+        return;
+    }
+
+    const lengthValue = parseFloat(length.value);
+    const heightValue = parseFloat(height.value);
+    const widthValue = parseFloat(width.value);
+    const speciesValue = species.value;
+
+    if (isNaN(lengthValue) || isNaN(heightValue) || isNaN(widthValue) || !speciesValue) {
         document.getElementById('result').innerText = 'Please enter valid data for all fields';
         document.getElementById('result').classList.remove('d-none');
         return;
     }
 
-    const prediction = length * model.coefficients[0] + height * model.coefficients[1] + width * model.coefficients[2] + model.intercept;
+    const prediction = lengthValue * model.coefficients[0] + heightValue * model.coefficients[1] + widthValue * model.coefficients[2] + model.intercept;
 
     if (prediction < 0) {
         document.getElementById('result').innerText = 'Prediction error: Weight cannot be negative';
