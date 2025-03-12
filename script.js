@@ -10,17 +10,26 @@ async function predict() {
         await loadModel();
     }
 
-    const feature1 = parseFloat(document.getElementById('feature1').value);
-    const feature2 = parseFloat(document.getElementById('feature2').value);
+    const length = parseFloat(document.getElementById('length').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const width = parseFloat(document.getElementById('width').value);
+    const species = document.getElementById('species').value;
 
-    if (isNaN(feature1) || isNaN(feature2)) {
-        document.getElementById('result').innerText = 'Please enter valid numbers for all features';
+    if (isNaN(length) || isNaN(height) || isNaN(width) || !species) {
+        document.getElementById('result').innerText = 'Please enter valid data for all fields';
+        document.getElementById('result').classList.remove('d-none');
         return;
     }
 
-    const prediction = feature1 * model.coefficients[0] + feature2 * model.coefficients[1] + model.intercept;
+    const prediction = length * model.coefficients[0] + height * model.coefficients[1] + width * model.coefficients[2] + model.intercept;
 
-    document.getElementById('result').innerText = `Predicted Weight: ${prediction.toFixed(2)}`;
+    if (prediction < 0) {
+        document.getElementById('result').innerText = 'Prediction error: Weight cannot be negative';
+    } else {
+        document.getElementById('result').innerText = `Predicted Weight: ${prediction.toFixed(2)} g`;
+    }
+
+    document.getElementById('result').classList.remove('d-none');
 }
 
 window.onload = loadModel;
